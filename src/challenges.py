@@ -4,11 +4,11 @@ Students implement graph helper functions using adjacency lists,
 visited sets, BFS, and DFS.
 """
 
-from __future__ import annotations
 from collections import deque
+from typing import Dict, List
 
 
-Graph = dict[str, list[str]]
+Graph = Dict[str, List[str]]
 
 
 def get_neighbors(graph: Graph, area: str) -> list[str]:
