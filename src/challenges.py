@@ -4,6 +4,7 @@ Students implement graph helper functions using adjacency lists,
 visited sets, BFS, and DFS.
 """
 
+from __future__ import annotations
 from collections import deque
 
 
