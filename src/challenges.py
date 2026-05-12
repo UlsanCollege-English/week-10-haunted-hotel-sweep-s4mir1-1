@@ -1,4 +1,5 @@
-"""Week 10 Coding #8: Haunted Hotel Sweep.
+"""
+Week 10 Coding #8: Haunted Hotel Sweep.
 
 Students implement graph helper functions using adjacency lists,
 visited sets, BFS, and DFS.
@@ -11,7 +12,7 @@ from typing import Dict, List
 Graph = Dict[str, List[str]]
 
 
-def get_neighbors(graph: Graph, area: str) -> list[str]:
+def get_neighbors(graph: Graph, area: str) -> List[str]:
     """Return neighboring areas, or [] if the area is missing.
 
     Example:
@@ -32,22 +33,29 @@ def has_path(graph: Graph, start: str, target: str) -> bool:
     """
     if start not in graph or target not in graph:
         return False
+
     visited = set()
     queue = deque([start])
+
     while queue:
         current = queue.popleft()
+
         if current == target:
             return True
+
         if current in visited:
             continue
+
         visited.add(current)
+
         for neighbor in graph.get(current, []):
             if neighbor not in visited:
                 queue.append(neighbor)
+
     return False
 
 
-def bfs_order(graph: Graph, start: str) -> list[str]:
+def bfs_order(graph: Graph, start: str) -> List[str]:
     """Return areas in breadth-first sweep order.
 
     Use a queue with collections.deque.
@@ -56,21 +64,24 @@ def bfs_order(graph: Graph, start: str) -> list[str]:
     """
     if start not in graph:
         return []
-    visited = set()
+
+    visited = set([start])
     result = []
     queue = deque([start])
-    visited.add(start)
+
     while queue:
         current = queue.popleft()
         result.append(current)
+
         for neighbor in graph.get(current, []):
             if neighbor not in visited:
                 visited.add(neighbor)
                 queue.append(neighbor)
+
     return result
 
 
-def dfs_order(graph: Graph, start: str) -> list[str]:
+def dfs_order(graph: Graph, start: str) -> List[str]:
     """Return areas in depth-first sweep order.
 
     Use a stack.
@@ -81,18 +92,24 @@ def dfs_order(graph: Graph, start: str) -> list[str]:
     """
     if start not in graph:
         return []
+
     visited = set()
     result = []
     stack = [start]
+
     while stack:
         current = stack.pop()
+
         if current in visited:
             continue
+
         visited.add(current)
         result.append(current)
+
         for neighbor in reversed(graph.get(current, [])):
             if neighbor not in visited:
                 stack.append(neighbor)
+
     return result
 
 
@@ -103,4 +120,5 @@ def count_reachable_areas(graph: Graph, start: str) -> int:
     """
     if start not in graph:
         return 0
+
     return len(bfs_order(graph, start))
